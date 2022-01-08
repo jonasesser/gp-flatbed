@@ -1,7 +1,27 @@
 import * as alt from 'alt-server';
 import { GP_Events_Flatbed } from '../../client-plugins/gpVehicle/events';
-import { Tow } from '../../client-plugins/gpVehicle/shared';
 import VehicleFuncs from '../../server/extensions/VehicleFuncs';
+import { ITow } from '../../shared/gpFlatbed/iTow';
+
+/**
+ * A tow
+ */
+class Tow implements ITow {
+    /**
+     * The flatbed vehicle
+     */
+    flatbed: alt.Vehicle;
+
+    /**
+     * The towed vehicle
+     */
+    towed: alt.Vehicle;
+
+    constructor(flatbed: alt.Vehicle, towed: alt.Vehicle) {
+        this.flatbed = flatbed;
+        this.towed = towed;
+    }
+}
 
 let tows: Tow[] = [];
 

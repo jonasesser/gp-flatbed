@@ -14,7 +14,9 @@ Just for testing...no support!
 
     ```import './fpFlatbed/index';```
 
-5. Create key bind for the athena KeyBindcontroller
+5. Copy Folder shared/gpFlatbed to your athena project under src/core/shared/
+
+6. Create key bind for the athena KeyBindcontroller
 
 # Credits:
 

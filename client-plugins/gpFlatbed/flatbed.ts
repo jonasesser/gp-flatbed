@@ -4,7 +4,22 @@ import { KeybindController } from '../../client/events/keyup';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { GP_Events_Flatbed } from './events';
-import { Tow } from './shared';
+import { ITow } from '../../shared/gpFlatbed/iTow';
+
+/**
+ * A tow
+ */
+class Tow implements ITow {
+    /**
+     * The flatbed vehicle
+     */
+    flatbed: alt.Vehicle;
+
+    /**
+     * The towed vehicle
+     */
+    towed: alt.Vehicle;
+}
 
 export class gpFlatbed {
     static init() {
