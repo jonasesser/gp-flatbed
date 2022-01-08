@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { GP_Events_Flatbed } from '../../client-plugins/gpVehicle/events';
 import { Tow } from '../../client-plugins/gpVehicle/shared';
+import VehicleFuncs from '../../server/extensions/VehicleFuncs';
 
 let tows: Tow[] = [];
 
@@ -18,6 +19,12 @@ export class gpFlatbed {
             if (tow.flatbed != thistow.flatbed) {
                 temptows.push(tow);
             } else {
+                //Save new position
+                VehicleFuncs.save(thistow.towed, {
+                    position: thistow.dropOffPosition,
+                    rotation: thistow.dropOffRotation,
+                });
+
                 //Reset netOwner for towed vehicle
                 thistow.towed.resetNetOwner();
             }

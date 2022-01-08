@@ -8,12 +8,16 @@ export class Tow {
      *  lt.Vehicle
      */
     flatbed: any;
+
     /**
      * The towed vehicle
      * any -> because client/server side transfer
      * alt.Vehicle
      */
     towed: any;
+
+    dropOffPosition?: any;
+    dropOffRotation?: any;
 
     constructor(flatbed: any, towed: any) {
         this.flatbed = flatbed;
