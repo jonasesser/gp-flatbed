@@ -60,9 +60,6 @@ export class gpFlatbed {
                         true,
                     );
                     native.detachEntity(tow.towed, true, true);
-
-                    tow.dropOffPosition = native.getEntityCoords(tow.towed, true);
-                    tow.dropOffRotation = native.getEntityHeading(tow.towed);
                     alt.emitServer(GP_Events_Flatbed.RemoveTow, tow);
                     found = true;
                 }

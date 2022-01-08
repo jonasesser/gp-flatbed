@@ -16,9 +16,6 @@ export class Tow {
      */
     towed: any;
 
-    dropOffPosition?: any;
-    dropOffRotation?: any;
-
     constructor(flatbed: any, towed: any) {
         this.flatbed = flatbed;
         this.towed = towed;

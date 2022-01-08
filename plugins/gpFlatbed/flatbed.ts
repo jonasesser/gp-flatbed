@@ -21,8 +21,8 @@ export class gpFlatbed {
             } else {
                 //Save new position
                 VehicleFuncs.save(thistow.towed, {
-                    position: thistow.dropOffPosition,
-                    rotation: thistow.dropOffRotation,
+                    position: thistow.towed.pos,
+                    rotation: thistow.towed.rot,
                 });
 
                 //Reset netOwner for towed vehicle
