@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { GP_Events_Flatbed } from '../../client-plugins/gpVehicle/events';
+import { GP_Events_Flatbed } from '../../client-plugins/gpFlatbed/events';
 import VehicleFuncs from '../../server/extensions/VehicleFuncs';
 import { ITow } from '../../shared/gpFlatbed/iTow';
 

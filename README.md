@@ -12,7 +12,7 @@ Just for testing...no support!
 3. Copy Folder plugins/gpFlatbed to your athena project under src/core/plugins/
 4. Import server plugin in src/core/plugins/imports.ts:
 
-    ```import './fpFlatbed/index';```
+    ```import './gpFlatbed/index';```
 
 5. Copy Folder shared/gpFlatbed to your athena project under src/core/shared/
 
