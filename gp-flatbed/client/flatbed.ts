@@ -1,10 +1,18 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KeybindController } from '../../client/events/keyup';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { GP_Events_Flatbed } from './events';
-import { ITow } from '../../shared/gpFlatbed/iTow';
+import { KeybindController } from '../../../client/events/keyup';
+import { KEY_BINDS } from '../../../shared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { ITow } from '../../../shared/gpVehicle/iTow';
+import { GP_Events_Flatbed } from '../shared/events';
+
+let positionOnTow = new Map<number, alt.Vector3>();
+positionOnTow.set(native.getHashKey('flatbed'), new alt.Vector3(-0.5, -5.5, 1));
+positionOnTow.set(native.getHashKey('slamtruck'), new alt.Vector3(0, -2, 0.5));
+
+let positionBehindTow = new Map<number, alt.Vector3>();
+positionBehindTow.set(native.getHashKey('flatbed'), new alt.Vector3(-0.5, -13, 0));
+positionBehindTow.set(native.getHashKey('slamtruck'), new alt.Vector3(0, -7.5, 0));
 
 /**
  * A tow
@@ -42,10 +50,7 @@ export class gpFlatbed {
     }
 
     static getTowedVehiclesList() {
-        if (
-            alt.Player.local.vehicle &&
-            native.getEntityModel(alt.Player.local.vehicle.scriptID) == native.getHashKey('flatbed')
-        ) {
+        if (alt.Player.local.vehicle && positionOnTow.get(native.getEntityModel(alt.Player.local.vehicle.scriptID))) {
             alt.emitServer(GP_Events_Flatbed.GetTowedVehiclesList);
         }
     }
@@ -57,12 +62,15 @@ export class gpFlatbed {
             let found = false;
             tows.forEach((tow) => {
                 if (tow.flatbed && tow.flatbed.scriptID == alt.Player.local.vehicle.scriptID) {
+                    let positionBehind = positionBehindTow.get(
+                        native.getEntityModel(alt.Player.local.vehicle.scriptID),
+                    );
                     native.attachEntityToEntity(
                         tow.towed.scriptID,
                         tow.flatbed.scriptID,
                         20,
-                        -0.5,
-                        -13.0,
+                        positionBehind.x,
+                        positionBehind.y,
                         0.0,
                         0.0,
                         0.0,
@@ -104,14 +112,15 @@ export class gpFlatbed {
                     true,
                 );
 
-                if (!found && dist <= 10.0 && dist >= 8.0 && dist != 0) {
+                if (!found && dist <= 12.0 && dist >= 7.0 && dist != 0) {
+                    let positionOn = positionOnTow.get(native.getEntityModel(alt.Player.local.vehicle.scriptID));
                     native.attachEntityToEntity(
                         veh.scriptID,
                         alt.Player.local.vehicle.scriptID,
                         20,
-                        -0.5,
-                        -5.5,
-                        1.0,
+                        positionOn.x,
+                        positionOn.y,
+                        positionOn.z,
                         0.0,
                         0.0,
                         0.0,
