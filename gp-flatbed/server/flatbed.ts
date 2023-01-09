@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
-import { ITow } from '../../../shared/gpVehicle/iTow';
 import { GP_Events_Flatbed } from '../shared/events';
+import { ITow } from '../shared/iTow';
 
 /**
  * A tow

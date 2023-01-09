@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { KeybindController } from '../../../client/events/keyup';
 import { KEY_BINDS } from '../../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { ITow } from '../../../shared/gpVehicle/iTow';
+import { ITow } from '../shared/iTow';
 import { GP_Events_Flatbed } from '../shared/events';
 
 let positionOnTow = new Map<number, alt.Vector3>();
@@ -81,6 +81,7 @@ export class gpFlatbed {
                         false,
                         20,
                         true,
+                        false, //TODO: New parameter unknown
                     );
                     native.detachEntity(tow.towed, true, true);
                     alt.emitServer(GP_Events_Flatbed.RemoveTow, tow);
@@ -130,6 +131,7 @@ export class gpFlatbed {
                         false,
                         10,
                         true,
+                        false, //TODO: New parameter unknown
                     );
                     alt.emitServer(GP_Events_Flatbed.AddTow, alt.Player.local.vehicle, veh);
                     found = true;
