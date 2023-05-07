@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
+import * as Athena from '@AthenaServer/api';
 import { GP_Events_Flatbed } from '../shared/events';
 import { ITow } from '../shared/iTow';
 
@@ -33,17 +33,18 @@ export class gpFlatbed {
         alt.onClient(GP_Events_Flatbed.GetVehiclesList, gpFlatbed.getVehiclesList);
     }
 
-    static removeTow(player: alt.Player, thistow: Tow) {
+    static async removeTow(player: alt.Player, thistow: Tow) {
         let temptows = [];
-        tows.forEach((tow) => {
+        tows.forEach(async (tow) => {
             if (tow.flatbed != thistow.flatbed) {
                 temptows.push(tow);
             } else {
                 //Save new position
-                VehicleFuncs.save(thistow.towed, {
-                    position: thistow.towed.pos,
-                    rotation: thistow.towed.rot,
-                });
+                await Athena.vehicle.controls.update(thistow.towed);
+                // VehicleFuncs.save(thistow.towed, {
+                //     position: thistow.towed.pos,
+                //     rotation: thistow.towed.rot,
+                // });
 
                 //Reset netOwner for towed vehicle
                 thistow.towed.resetNetOwner();

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KeybindController } from '../../../client/events/keyup';
+import * as AthenaClient from '@AthenaClient/api';
 import { KEY_BINDS } from '../../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { ITow } from '../shared/iTow';
@@ -43,9 +43,11 @@ export class gpFlatbed {
      */
     static registerKeybinds() {
         //Dependency to Athena Framework, replace if Athena will not be used.
-        KeybindController.registerKeybind({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.TOWTRUCK,
-            singlePress: gpFlatbed.getTowedVehiclesList,
+            description: 'Towtruck',
+            identifier: 'Towtruck-getvehiclelist',
+            keyDown: gpFlatbed.getTowedVehiclesList,
         });
     }
 
